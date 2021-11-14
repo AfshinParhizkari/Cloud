@@ -1,0 +1,18 @@
+###  http://localhost:8084/ddd/api-ui
+POST http://localhost:8084/ddd/finance/payed
+Accept: application/json
+Content-Type: application/json
+
+{
+  "customer":2,
+  "transaction":"sb125954c",
+  "transport": "2021-11-11 14:30:50"
+}
+################Carry##################################################################################
+PUT http://localhost:8084/ddd/finance/carry
+Accept: application/json
+Content-Type: application/json
+
+{
+"code":10447
+}
