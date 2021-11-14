@@ -1,0 +1,23 @@
+package com.afshin.finance.infrastructure.repository;
+/**
+ * @Project DDD
+ * @Author Afshin Parhizkari
+ * @Date Apr 26, 2021 2:58:19 AM
+ * @version
+ * Created by Eclipse 2020-09
+ * Email:       Afshin.Parhizkari@gmail.com
+ * Description: 
+*/
+
+import com.afshin.finance.domain.entity.Order;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
+
+public interface OrderDao extends JpaRepository<Order, Integer>{
+    @Modifying
+    @Transactional
+    @Query("update Order o set o.state=:state where o.orderpk = :ordercode ")
+    Integer updateState(Integer ordercode,String state);
+}
