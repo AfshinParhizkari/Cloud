@@ -31,9 +31,7 @@ public class CartRst {
 
     @PostMapping(value = "/who")
     public String whoami(@RequestBody String receivedData) throws Exception {
-        JSONObject json = new JSONObject(receivedData);
-        String customerCode=json.optString("customercode","0");
-        return (new ObjectMapper()).writeValueAsString(peopleRso.find(customerCode));
+        return (new ObjectMapper()).writeValueAsString(peopleRso.find(receivedData));
     }
 
     @PostMapping(value = "/showcart")

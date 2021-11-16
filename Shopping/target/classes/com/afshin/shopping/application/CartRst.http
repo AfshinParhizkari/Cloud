@@ -58,5 +58,5 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "customercode":"2"
+  "code":2
 }
