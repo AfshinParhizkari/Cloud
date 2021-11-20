@@ -30,7 +30,7 @@ public class ProductRso {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> request =new HttpEntity<String>(inputValue, headers);
-        Product[] products =restTemplate.postForObject(resoConfig.getURI("product")+serviceName, request, Product[].class);
+        Product[] products =restTemplate.postForObject(serviceName, request, Product[].class);
         //String productJson =restTemplate.postForObject(findPath, request, String.class);
         return Arrays.asList(products);
     }

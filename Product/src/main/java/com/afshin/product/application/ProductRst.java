@@ -28,6 +28,7 @@ public class ProductRst {
 
     @PostMapping(value = "/find")
     public String find(@RequestBody String receivedData) throws Exception {
+        System.err.println("Attention: Some App call this Instance");
         JSONObject json = new JSONObject(receivedData);
         Integer code=json.optInt("code",0);
         Integer page=json.optInt("page",0);
@@ -36,6 +37,7 @@ public class ProductRst {
 
     @PostMapping(value = "/quantity")
     public String getQuantity(@RequestBody List<Integer> productKeys) throws Exception {
+        System.err.println("Attention: Some App call this Instance");
         return (new ObjectMapper()).writeValueAsString(srv.getQuantity(productKeys));
     }
 

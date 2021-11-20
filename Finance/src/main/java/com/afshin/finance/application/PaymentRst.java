@@ -10,22 +10,26 @@ package com.afshin.finance.application;
  */
 
 import com.afshin.finance.domain.service.PaymentSrv;
+import com.afshin.finance.infrastructure.resource.ProductRso;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @RestController//Application Layer
 @RequestMapping("/finance")
 public class PaymentRst {
     @Autowired private PaymentSrv srv;
+    @Autowired private ProductRso pRso;
 
     @PostMapping(value = "/payed")
     public String payInvoice(@RequestBody String receivedData) throws Exception {
@@ -44,6 +48,15 @@ public class PaymentRst {
         JSONObject json = new JSONObject(receivedData);
         Integer code=json.optInt("code",0);
         return srv.updateState(code,"shipped");
+    }
+    @PostMapping(value = "/showquantity")
+    public String showQuantity() throws Exception {
+        List<Integer> productKeys= new ArrayList();
+        productKeys.add(1);
+        productKeys.add(2);
+        productKeys.add(3);
+        productKeys.add(4);
+        return (new ObjectMapper()).writeValueAsString(pRso.getQuantity(productKeys));
     }
 
     @ExceptionHandler(Exception.class)

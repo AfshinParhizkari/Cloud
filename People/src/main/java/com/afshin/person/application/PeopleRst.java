@@ -34,7 +34,8 @@ public class PeopleRst {
     }
     @PostMapping(value = "/who")
     public String whoami(@RequestBody String receivedData) throws Exception {
-        JSONObject json = new JSONObject(receivedData);
+        System.err.println("Attention: Some App call this Instance");
+    	JSONObject json = new JSONObject(receivedData);
         Integer code=json.optInt("code",0);
         return (new ObjectMapper()).writeValueAsString(srv.find(code,0));
     }
