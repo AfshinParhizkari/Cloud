@@ -108,6 +108,11 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-loadbalancer</artifactId>
 		</dependency>
+        <!-- _______ CircuitBreaker =FaultTolerance resilience4j _____ -->
+		<dependency>
+		    <groupId>org.springframework.cloud</groupId>
+		    <artifactId>spring-cloud-starter-circuitbreaker-reactor-resilience4j</artifactId>
+		</dependency>
     </dependencies>
   <dependencyManagement>
     <dependencies>

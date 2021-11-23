@@ -15,11 +15,11 @@ import com.afshin.shopping.infrastructure.resource.PeopleRso;
 import com.afshin.shopping.infrastructure.resource.ProductRso;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,9 +48,11 @@ public class CartRst {
     	    										+ "  \"code\":2\n"
     	    										+ "}",
     								summary = "who") }))
+    @CircuitBreaker(name="whoami",fallbackMethod = "whomFB")
     @PostMapping(value = "/who")
     public ResponseEntity<String> whoami(@RequestBody String receivedData) throws Exception {
-        String response=(new ObjectMapper()).writeValueAsString(peopleRso.find(receivedData));
+        System.out.println("Circuit is close.Enter to get customer process");
+    	String response=(new ObjectMapper()).writeValueAsString(peopleRso.find(receivedData));
         return new ResponseEntity<String>(response,HttpStatus.OK);
     }
 
@@ -138,7 +140,6 @@ public class CartRst {
         return new ResponseEntity<String>(srv.addToCart(obj),HttpStatus.OK);
     }
 
-    
     @Operation(summary = "Finalize cart for payment")
     @io.swagger.v3.oas.annotations.parameters.RequestBody(
     		description = "send order to payment app",
@@ -173,6 +174,7 @@ public class CartRst {
     										+ "  \"page\":null\n"
     										+ "}",
     								summary = "All Products") }))
+    @CircuitBreaker(name="products",fallbackMethod = "productFB")
     @PostMapping(value = "/showproduct")
     public ResponseEntity<String> showProduct(@RequestBody(required = false) String receivedData) throws Exception {
         JSONObject json = new JSONObject(receivedData);
@@ -183,9 +185,40 @@ public class CartRst {
         return new ResponseEntity<String>(response,HttpStatus.OK);
     }
 
+    @SuppressWarnings("unused")
+	private ResponseEntity<String> defaultFB(Exception ex){
+        System.out.println("Circuit is open. In fallback method");
+    	return new ResponseEntity<String>(getdetailMessage(ex),HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+    
+	@SuppressWarnings("unused")
+	private ResponseEntity<String> whomFB(Exception ex){
+        System.out.println("whom Circuit is open:"+getdetailMessage(ex));
+    	return new ResponseEntity<String>(
+    			"{\"personpk\":0,\"persontypeid\":0,\"typedetailid\":0,\"nationalkey\":\"0000000000\",\"lastname\":\"Not response\",\"firstname\":\"who service\"}",
+    			HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+	@SuppressWarnings("unused")
+	private ResponseEntity<String> productFB(Exception ex){
+        System.out.println("show product Circuit is open:"+getdetailMessage(ex));
+    	return new ResponseEntity<String>(
+    			"[{\"productpk\":0,\"productname\":\"Product microservice is down\",\"categoryfk\":0,\"vendor\":\"AfshinParhizkari\",\"quantity\":0,\"unit\":\"Error\",\"saleprice\":0,\"description\":\"Product/showproduct doesn't work now. try it later\"}}]",
+    			HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+    
     @ExceptionHandler(Exception.class)
     @ResponseStatus(value= HttpStatus.INTERNAL_SERVER_ERROR)
-    public ResponseEntity<Object> generalException(Exception ex) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ExceptionUtils.getRootCause(ex).getMessage());
+    public ResponseEntity<String> generalException(Exception ex) {
+        System.out.println("In Exception handler method");
+    	return new ResponseEntity<String>(getdetailMessage(ex),HttpStatus.INTERNAL_SERVER_ERROR);
     }
+	private static String getdetailMessage(Exception ex) {
+	    String result = ex.getMessage();
+	    Throwable throwable=ex.getCause();
+	    while (throwable != null) {
+	       result=ex.getCause().getMessage();
+	       throwable = throwable.getCause();
+	    }
+	    return result;
+	}
 }

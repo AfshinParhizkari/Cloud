@@ -13,6 +13,7 @@ import com.afshin.finance.domain.service.PaymentSrv;
 import com.afshin.finance.infrastructure.resource.ProductRso;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 
@@ -52,6 +53,7 @@ public class PaymentRst {
     										+ "}",
     								summary = "pay") }))
     @PostMapping(value = "/payed")
+    @CircuitBreaker(name="quantity",fallbackMethod = "quantityFB")
     public ResponseEntity<String> payInvoice(@RequestBody String receivedData) throws Exception {
         JSONObject json = new JSONObject(receivedData);
         Integer customerCode=json.optInt("customer",0);
@@ -87,6 +89,7 @@ public class PaymentRst {
     
     @Operation(summary = "return quantity of Products")
     @PostMapping(value = "/showquantity")
+    @CircuitBreaker(name="quantity",fallbackMethod = "quantityFB")
     public ResponseEntity<String> showQuantity() throws Exception {
         List<Integer> productKeys= new ArrayList<Integer>();
         productKeys.add(1);
@@ -96,6 +99,23 @@ public class PaymentRst {
         String response=(new ObjectMapper()).writeValueAsString(pRso.getQuantity(productKeys));
         return new ResponseEntity<String>(response,HttpStatus.OK);
     }
+    
+	@SuppressWarnings("unused")
+	private ResponseEntity<String> quantityFB(Exception ex){
+        System.out.println("Quantity Circuit is open:"+getdetailMessage(ex));
+    	return new ResponseEntity<String>(
+    			"[{\"productpk\":0,\"quantity\":0}]",
+    			HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+	private static String getdetailMessage(Exception ex) {
+	    String result = ex.getMessage();
+	    Throwable throwable=ex.getCause();
+	    while (throwable != null) {
+	       result=ex.getCause().getMessage();
+	       throwable = throwable.getCause();
+	    }
+	    return result;
+	}
 
     @ExceptionHandler(Exception.class)
     @ResponseStatus(value= HttpStatus.INTERNAL_SERVER_ERROR)
