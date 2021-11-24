@@ -14,7 +14,7 @@ import com.afshin.finance.infrastructure.mq.ProductMq;
 import com.afshin.finance.infrastructure.repository.OrderDao;
 import com.afshin.finance.infrastructure.repository.OrderitemDao;
 import com.afshin.finance.infrastructure.repository.PaymentDao;
-import com.afshin.finance.infrastructure.resource.ProductRso;
+import com.afshin.finance.infrastructure.resource.ProductRes;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,7 +34,7 @@ public class PaymentSrv {
     @Autowired private OrderDao oDao;
     @Autowired private OrderitemDao dDao;
     @Autowired private PaymentDao pDao;
-    @Autowired private ProductRso pRso;
+    @Autowired private ProductRes pRso;
 
     @Transactional(rollbackFor=Exception.class, propagation= Propagation.REQUIRED)
     public String payOrder(Integer customerCode, Timestamp transportDate,String transaction) throws IOException {

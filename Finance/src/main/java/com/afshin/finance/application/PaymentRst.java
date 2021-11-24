@@ -10,13 +10,12 @@ package com.afshin.finance.application;
  */
 
 import com.afshin.finance.domain.service.PaymentSrv;
-import com.afshin.finance.infrastructure.resource.ProductRso;
+import com.afshin.finance.infrastructure.resource.PeopleRes;
+import com.afshin.finance.infrastructure.resource.ProductRes;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
-
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +34,8 @@ import java.util.List;
 @RequestMapping("/finance")
 public class PaymentRst {
     @Autowired private PaymentSrv srv;
-    @Autowired private ProductRso pRso;
+    @Autowired private ProductRes productRes;
+    @Autowired private PeopleRes peopleRes;
 
     @Operation(summary = "pay Invoice")
     @io.swagger.v3.oas.annotations.parameters.RequestBody(
@@ -89,23 +89,48 @@ public class PaymentRst {
     
     @Operation(summary = "return quantity of Products")
     @PostMapping(value = "/showquantity")
-    @CircuitBreaker(name="quantity",fallbackMethod = "quantityFB")
+    //@CircuitBreaker(name="quantity",fallbackMethod = "quantityFB")
     public ResponseEntity<String> showQuantity() throws Exception {
         List<Integer> productKeys= new ArrayList<Integer>();
         productKeys.add(1);
         productKeys.add(2);
         productKeys.add(3);
         productKeys.add(4);
-        String response=(new ObjectMapper()).writeValueAsString(pRso.getQuantity(productKeys));
+        String response=(new ObjectMapper()).writeValueAsString(productRes.getQuantity(productKeys));
         return new ResponseEntity<String>(response,HttpStatus.OK);
     }
-    
+
 	@SuppressWarnings("unused")
 	private ResponseEntity<String> quantityFB(Exception ex){
         System.out.println("Quantity Circuit is open:"+getdetailMessage(ex));
     	return new ResponseEntity<String>(
     			"[{\"productpk\":0,\"quantity\":0}]",
     			HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @Operation(summary = "return a customer")
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(
+    		description = "Who am i?",
+    		required = true,
+    		content = @io.swagger.v3.oas.annotations.media.Content (
+    				mediaType = MediaType.APPLICATION_JSON_VALUE,
+    				examples = {
+    						@ExampleObject(
+    								name = "get customer",
+    	    								value = "{\n"
+    	    										+ "  \"code\":2\n"
+    	    										+ "}",
+    								summary = "who") }))
+    @PostMapping(value = "/who")
+    public ResponseEntity<String> whoami(@RequestBody String receivedData) throws Exception {
+    	String response=(new ObjectMapper()).writeValueAsString(peopleRes.find(receivedData));
+    	return new ResponseEntity<String>(response,HttpStatus.OK);
+    }
+
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(value= HttpStatus.INTERNAL_SERVER_ERROR)
+    public ResponseEntity<Object> generalException(Exception ex) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ExceptionUtils.getRootCause(ex).getMessage());
     }
 	private static String getdetailMessage(Exception ex) {
 	    String result = ex.getMessage();
@@ -117,9 +142,4 @@ public class PaymentRst {
 	    return result;
 	}
 
-    @ExceptionHandler(Exception.class)
-    @ResponseStatus(value= HttpStatus.INTERNAL_SERVER_ERROR)
-    public ResponseEntity<Object> generalException(Exception ex) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ExceptionUtils.getRootCause(ex).getMessage());
-    }
 }

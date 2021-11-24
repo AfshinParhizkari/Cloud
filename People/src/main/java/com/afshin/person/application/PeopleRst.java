@@ -11,6 +11,7 @@ package com.afshin.person.application;
 
 import com.afshin.person.domain.entity.Person;
 import com.afshin.person.domain.service.PersonSrv;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -77,6 +78,7 @@ public class PeopleRst {
     								summary = "who") }))
     @PostMapping(value = "/who")
     @ResponseStatus(HttpStatus.OK)
+    @JsonView(Person.PersonLight.class)
     public ResponseEntity<String> whoami(@RequestBody String receivedData) throws Exception {
         System.out.println("Attention: Some App call this Instance");
     	JSONObject json = new JSONObject(receivedData);

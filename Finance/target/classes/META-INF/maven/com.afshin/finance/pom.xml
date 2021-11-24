@@ -113,6 +113,11 @@
 		    <groupId>org.springframework.cloud</groupId>
 		    <artifactId>spring-cloud-starter-circuitbreaker-reactor-resilience4j</artifactId>
 		</dependency>
+		<!-- ______Cloud-OpenFeign: Resource(RestApi) Auto generate  _____ -->
+		<dependency>
+		    <groupId>org.springframework.cloud</groupId>
+		    <artifactId>spring-cloud-starter-openfeign</artifactId>
+		</dependency>
     </dependencies>
   <dependencyManagement>
     <dependencies>

@@ -21,7 +21,11 @@ import java.sql.Timestamp;
 @Table(name = "cart")
 @IdClass(CartPK.class)
 public class Cart implements Serializable {
-    private Integer customerfk;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Integer customerfk;
     private Integer productfk;
     private Integer quantity;
     private BigDecimal price;

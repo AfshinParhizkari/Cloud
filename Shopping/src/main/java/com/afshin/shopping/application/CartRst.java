@@ -195,7 +195,7 @@ public class CartRst {
 	private ResponseEntity<String> whomFB(Exception ex){
         System.out.println("whom Circuit is open:"+getdetailMessage(ex));
     	return new ResponseEntity<String>(
-    			"{\"personpk\":0,\"persontypeid\":0,\"typedetailid\":0,\"nationalkey\":\"0000000000\",\"lastname\":\"Not response\",\"firstname\":\"who service\"}",
+    			"{\"personpk\":0,\"persontypeid\":0,\"typedetailid\":0,\"nationalkey\":\"0000000000\",\"lastname\":\"People microservice is down\",\"firstname\":\"People/who doesn't response\"}",
     			HttpStatus.INTERNAL_SERVER_ERROR);
     }
 	@SuppressWarnings("unused")

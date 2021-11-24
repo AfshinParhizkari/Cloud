@@ -10,21 +10,15 @@ package com.afshin.shopping.infrastructure.resource;
  */
 
 import com.afshin.shopping.domain.entity.Person;
-import com.afshin.shopping.domain.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.client.ServiceInstance;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
-import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import java.io.IOException;
-import java.net.URI;
 import java.util.Arrays;
-import java.util.List;
 
 @Service
 public class PeopleRso {

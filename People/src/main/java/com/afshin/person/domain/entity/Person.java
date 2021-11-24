@@ -15,6 +15,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonView;
+
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
@@ -41,6 +43,7 @@ public class Person {
     @Id
     @Column(name = "personpk")
     @GeneratedValue(strategy=GenerationType.IDENTITY) //specify the generation strategy used for the primary key.
+    @JsonView(PersonLight.class)
     public Integer getPersonpk() {
         return personpk;
     }
@@ -52,6 +55,7 @@ public class Person {
     @Column(name = "persontypeid")
     @NotNull(message = "نوع مشتری نمی تواند خالی باشد")
     @Max(value = 999,message = "نوع مشتری بین ۱ تا 3 رقم می باشد.") // must be an integer value lower than or equal to the number in the value element.
+    @JsonView(PersonLight.class)
     public Integer getPersontypeid() {
         return persontypeid;
     }
@@ -62,6 +66,7 @@ public class Person {
     @Basic
     @Column(name = "typedetailid")
     @Max(value = 999,message = "انواع مشتری بین ۱ تا 3 رقم می باشد.") // must be an integer value lower than or equal to the number in the value element.
+    @JsonView(PersonLight.class)
     public Integer getTypedetailid() {
         return typedetailid;
     }
@@ -73,6 +78,7 @@ public class Person {
     @Column(name = "nationalkey")
     @NotEmpty(message = "مشتری: کد یا شناسه ملی نمی تواند خالی باشد")
     @Pattern(regexp = "\\d{11}|\\d{10}|^$",message = "مشتری: کدملی 10 یا شناسه ملی 11 رقم است")
+    @JsonView(PersonLight.class)
     public String getNationalkey() {
         return nationalkey;
     }
@@ -119,6 +125,7 @@ public class Person {
     @Basic
     @Column(name = "lastname")
     @NotEmpty(message = "نام شرکت/نام خانوادگی نمی تواند خالی باشد.")
+    @JsonView(PersonLight.class)
     public String getLastname() {
         return lastname;
     }
@@ -128,6 +135,7 @@ public class Person {
 
     @Basic
     @Column(name = "firstname")
+    @JsonView(PersonLight.class)
     public String getFirstname() {
         return firstname;
     }
@@ -231,4 +239,6 @@ public class Person {
     public void setContactsByPersonpk(List<Contact> contactsByPersonpk) {
         this.contactsByPersonpk = contactsByPersonpk;
     }
+    
+    public interface PersonLight{}
 }
