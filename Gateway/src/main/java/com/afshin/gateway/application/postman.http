@@ -1,6 +1,5 @@
-###  http://192.168.1.34:8083/ddd/api-ui
 ##### Show Product #################################
-POST http://localhost:8083/ddd/shopping/showproduct
+POST http://localhost:8080/ddd/product/showproduct
 Accept: application/json
 Content-Type: application/json
 
