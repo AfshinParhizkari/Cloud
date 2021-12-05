@@ -19,6 +19,14 @@ spring:
         max-retries-on-same-service-instance: 0
         max-retries-on-next-service-instance: 1
     gateway:
+      default-filters: #DefaultFilter=GlobalFilters : filter for all the routes
+      - name: Retry
+        args:          
+          retries: 3
+          statuses: BAD_GATEWAY,SERVICE_UNAVAILABLE,GATEWAY_TIMEOUT
+          methods: GET,POST,PUT
+          exceptions: org.springframework.cloud.gateway.support.NotFoundException,java.io.IOException,org.springframework.cloud.gateway.support.TimeoutException
+#      - PrefixPath=/ver5
       discovery:
         locator:
           enabled: true
@@ -28,7 +36,7 @@ spring:
           uri: lb://people
           predicates:
           - Path=/ddd/people/who
-          filters:
+          filters: # WebFilter=GatewayFilter : filter for every single route
           - name: CircuitBreaker
             args:
               name: myCircuitBreaker
@@ -42,6 +50,24 @@ spring:
             args:
               name: myCircuitBreaker
               fallbackUri: lb://gateway/fb/showproduct
+        - id: shopping
+          uri: lb://shopping
+          predicates:
+          - Path=/ddd/shopping/**
+          filters:
+          - name: CircuitBreaker
+            args:
+              name: myCircuitBreaker
+              fallbackUri: lb://gateway/fb/
+        - id: payment
+          uri: lb://finance
+          predicates:
+          - Path=/ddd/finance/**
+          filters:
+          - name: CircuitBreaker
+            args:
+              name: myCircuitBreaker
+              fallbackUri: lb://gateway/fb/
 # ---------------circuitbreaker resilience4j
 resilience4j:
   circuitbreaker:

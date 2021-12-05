@@ -1,0 +1,372 @@
+{
+	"info": {
+		"_postman_id": "549820fa-88a3-42c0-b9bf-fc131f69b79a",
+		"name": "Cloud",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "people-who",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"code\":2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.1.34:8080/ddd/people/who",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"34"
+					],
+					"port": "8080",
+					"path": [
+						"ddd",
+						"people",
+						"who"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "shopping-who",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"code\":2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.1.34:8080/ddd/shopping/who",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"34"
+					],
+					"port": "8080",
+					"path": [
+						"ddd",
+						"shopping",
+						"who"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "shopping-showproduct",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"code\":null,\n  \"page\":null\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.1.34:8080/ddd/shopping/showproduct",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"34"
+					],
+					"port": "8080",
+					"path": [
+						"ddd",
+						"shopping",
+						"showproduct"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "shopping-showcart",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"code\":2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.1.34:8080/ddd/shopping/showcart",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"34"
+					],
+					"port": "8080",
+					"path": [
+						"ddd",
+						"shopping",
+						"showcart"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "shopping-addtocart",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"customerfk\": 2,\n  \"productfk\": 28,\n  \"quantity\": 0,\n  \"price\": 20.20\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.1.34:8080/ddd/shopping/addtocart",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"34"
+					],
+					"port": "8080",
+					"path": [
+						"ddd",
+						"shopping",
+						"addtocart"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "shopping-closecart",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"code\":2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.1.34:8080/ddd/shopping/closecart",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"34"
+					],
+					"port": "8080",
+					"path": [
+						"ddd",
+						"shopping",
+						"closecart"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "shopping-deletefromcart",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"customercode\":2,\n  \"productcode\":29\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.1.34:8080/ddd/shopping/deletefromcart",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"34"
+					],
+					"port": "8080",
+					"path": [
+						"ddd",
+						"shopping",
+						"deletefromcart"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "shopping-cancelcart",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"code\":2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.1.34:8080/ddd/shopping/cancelcart",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"34"
+					],
+					"port": "8080",
+					"path": [
+						"ddd",
+						"shopping",
+						"cancelcart"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "finance-payed",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"customer\":2,\n  \"transaction\":\"sb125954c\",\n  \"transport\": \"2021-11-11 14:30:50\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.1.34:8080/ddd/finance/payed",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"34"
+					],
+					"port": "8080",
+					"path": [
+						"ddd",
+						"finance",
+						"payed"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "finance-carry",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"code\":10467\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.1.34:8080/ddd/finance/carry",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"34"
+					],
+					"port": "8080",
+					"path": [
+						"ddd",
+						"finance",
+						"carry"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "product-showproduct",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"code\":null,\n  \"page\":0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.1.34:8080/ddd/product/find",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"34"
+					],
+					"port": "8080",
+					"path": [
+						"ddd",
+						"product",
+						"find"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

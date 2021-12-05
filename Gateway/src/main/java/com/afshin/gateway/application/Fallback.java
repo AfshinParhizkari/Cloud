@@ -28,5 +28,14 @@ public class Fallback {
     			"[{\"productpk\":0,\"productname\":\"Product microservice is down\",\"categoryfk\":0,\"vendor\":\"AfshinParhizkari\",\"quantity\":0,\"unit\":\"Error\",\"saleprice\":0,\"description\":\"Product/showproduct doesn't work now. try it later\"}}]",
     			HttpStatus.INTERNAL_SERVER_ERROR);
     }
+    
+    @PostMapping(value = "/")
+	private ResponseEntity<String> fallback(){
+        System.out.println("Circuit is open");
+    	return new ResponseEntity<String>(
+    			"[{\"Code\":1,\"message\":\"microservice is down and doesn't work now. try it later\"}}]",
+    			HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 
 }
