@@ -75,6 +75,12 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+<!-- _________ Logstash , Logback is embedded in Spring boot _____________ -->
+		<dependency>
+			<groupId>net.logstash.logback</groupId>
+			<artifactId>logstash-logback-encoder</artifactId>
+			<version>7.0.1</version>
+		</dependency>
 	</dependencies>
   <dependencyManagement>
     <dependencies>

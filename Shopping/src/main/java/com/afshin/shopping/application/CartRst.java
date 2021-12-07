@@ -27,6 +27,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RestController//Application Layer
 @RequestMapping("/shopping")
@@ -34,6 +36,7 @@ public class CartRst {
     @Autowired private CartSrv srv;
     @Autowired private ProductRso productRso;
     @Autowired private PeopleRso peopleRso;
+    public static final Logger logger  = LoggerFactory.getLogger(CartRst.class);
 
     @Operation(summary = "return a customer")
     @io.swagger.v3.oas.annotations.parameters.RequestBody(
@@ -51,7 +54,7 @@ public class CartRst {
     @CircuitBreaker(name="whoami",fallbackMethod = "whomFB")
     @PostMapping(value = "/who")
     public ResponseEntity<String> whoami(@RequestBody String receivedData) throws Exception {
-        System.out.println("Circuit is close.Enter to get customer process");
+        logger.info("Circuit is close.Enter to get customer process");
     	String response=(new ObjectMapper()).writeValueAsString(peopleRso.find(receivedData));
         return new ResponseEntity<String>(response,HttpStatus.OK);
     }
@@ -187,20 +190,20 @@ public class CartRst {
 
     @SuppressWarnings("unused")
 	private ResponseEntity<String> defaultFB(Exception ex){
-        System.out.println("Circuit is open. In fallback method");
+    	logger.info("Circuit is open. In fallback method");
     	return new ResponseEntity<String>(getdetailMessage(ex),HttpStatus.INTERNAL_SERVER_ERROR);
     }
     
 	@SuppressWarnings("unused")
 	private ResponseEntity<String> whomFB(Exception ex){
-        System.out.println("whom Circuit is open:"+getdetailMessage(ex));
+		logger.info("whom Circuit is open:"+getdetailMessage(ex));
     	return new ResponseEntity<String>(
     			"{\"personpk\":0,\"persontypeid\":0,\"typedetailid\":0,\"nationalkey\":\"0000000000\",\"lastname\":\"People microservice is down\",\"firstname\":\"People/who doesn't response\"}",
     			HttpStatus.INTERNAL_SERVER_ERROR);
     }
 	@SuppressWarnings("unused")
 	private ResponseEntity<String> productFB(Exception ex){
-        System.out.println("show product Circuit is open:"+getdetailMessage(ex));
+		logger.info("show product Circuit is open:"+getdetailMessage(ex));
     	return new ResponseEntity<String>(
     			"[{\"productpk\":0,\"productname\":\"Product microservice is down\",\"categoryfk\":0,\"vendor\":\"AfshinParhizkari\",\"quantity\":0,\"unit\":\"Error\",\"saleprice\":0,\"description\":\"Product/showproduct doesn't work now. try it later\"}}]",
     			HttpStatus.INTERNAL_SERVER_ERROR);
@@ -209,7 +212,7 @@ public class CartRst {
     @ExceptionHandler(Exception.class)
     @ResponseStatus(value= HttpStatus.INTERNAL_SERVER_ERROR)
     public ResponseEntity<String> generalException(Exception ex) {
-        System.out.println("In Exception handler method");
+    	logger.info("In Exception handler method");
     	return new ResponseEntity<String>(getdetailMessage(ex),HttpStatus.INTERNAL_SERVER_ERROR);
     }
 	private static String getdetailMessage(Exception ex) {

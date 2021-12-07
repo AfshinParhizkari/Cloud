@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="true">
+    <!-- Logging Properties     -->
+    <Property name="LOG_PATTERN" value="%d{yyyy-MM-dd' 'HH:mm:ss.SSSZ} %highlight(%-5level) %cyan(%C{0}.%M:%L) %yellow(%msg) %n"/>
+   <!--___________________________ APPENDER__________________________________-->
+    <appender name="consoleStudio" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+    <appender name="logstash" class="net.logstash.logback.appender.LogstashAccessTcpSocketAppender">
+        <destination>localhost:9090</destination>
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <mdc /> <!-- MDC variables on the Thread will be written as JSON fields -->
+                <context /> <!--Outputs entries from logback's context -->
+                <version /> <!-- Logstash json format version, the @version field in the output -->
+                <logLevel />
+                <loggerName />
+                <pattern><pattern>{"serviceName": "shopping-micro"}</pattern></pattern>
+                <threadName />
+                <message />
+                <logstashMarkers />
+                <stackTrace />
+            </providers>
+        </encoder>
+    </appender>
+   <!--________Set APPENDER ALL(TRACE(DEBUG(INFO(WARN(ERROR(FATAL(OFF)))))))_-->
+   	<root level="INFO">  
+        <appender-ref ref="consoleStudio" />
+        <appender-ref ref="logstash" />
+   	</root>
+</configuration>

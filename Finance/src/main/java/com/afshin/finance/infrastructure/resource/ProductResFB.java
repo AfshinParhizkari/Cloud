@@ -13,12 +13,16 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 import com.afshin.finance.domain.entity.Quantity;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @Component
 public class ProductResFB implements ProductRes {
+    public static final Logger logger  = LoggerFactory.getLogger(ProductResFB.class);
 
 	@Override
 	public List<Quantity> getQuantity(List<Integer> inputValue) {
-        System.out.println("Quantity service Circuit is open");
+		logger.info("Quantity service Circuit is open");
 		List<Quantity> quantities=new ArrayList<Quantity>();
 		quantities.add(new Quantity(0,0));
 		return quantities;

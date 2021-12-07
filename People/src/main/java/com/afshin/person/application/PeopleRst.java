@@ -26,11 +26,14 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RestController//Application Layer
 @RequestMapping("/people")
 public class PeopleRst {
     @Autowired private PersonSrv srv;
+    public static final Logger logger  = LoggerFactory.getLogger(PeopleRst.class);
 
     @Operation(summary = "return a customer or customers")
     @io.swagger.v3.oas.annotations.parameters.RequestBody(
@@ -80,7 +83,7 @@ public class PeopleRst {
     @ResponseStatus(HttpStatus.OK)
     @JsonView(Person.PersonLight.class)
     public ResponseEntity<String> whoami(@RequestBody String receivedData) throws Exception {
-        System.out.println("Attention: Some App call this Instance");
+    	logger.info("Attention: Some App call this Instance");
     	JSONObject json = new JSONObject(receivedData);
         Integer code=json.optInt("code",0);
         String response=(new ObjectMapper()).writeValueAsString(srv.find(code,0));

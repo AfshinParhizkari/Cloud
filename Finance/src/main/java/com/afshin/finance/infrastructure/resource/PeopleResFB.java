@@ -13,15 +13,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import com.afshin.finance.domain.entity.Person;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Component
 public class PeopleResFB implements PeopleRes{
+    public static final Logger logger  = LoggerFactory.getLogger(PeopleResFB.class);
 
 	@Override
 	public List<Person> find(String inputValue) {
-        System.out.println("who service Circuit is open");
+        logger.info("who service Circuit is open");
 		List<Person> persons=new ArrayList<Person>();
 		persons.add(new Person(0,0,0,"0000000000","People microservice is down","People/who doesn't response. try it later"));
 		return persons;
