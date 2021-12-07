@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="60 seconds" debug="true">
     <!-- Logging Properties     -->
-    <Property name="LOG_PATTERN" value="%d{yyyy-MM-dd' 'HH:mm:ss.SSSZ} %highlight(%-5level) %cyan(%C{0}.%M:%L) %yellow(%msg) %n"/>
+    <Property name="LOG_PATTERN" value="%d{yyyy-MM-dd' 'HH:mm:ss.SSSZ} %highlight(%-5level) [%thread, %X{X-B3-TraceId:-},%X{X-B3-SpanId:-}] %cyan(%C{0}.%M:%L) %yellow(%msg) %n"/>
    <!--___________________________ APPENDER__________________________________-->
     <appender name="consoleStudio" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">

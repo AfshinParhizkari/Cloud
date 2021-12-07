@@ -33,7 +33,11 @@
 			<artifactId>logstash-logback-encoder</artifactId>
 			<version>7.0.1</version>
 		</dependency>
-		
+<!-- _________ Sleuth , TraceId and SpanId _____________ -->
+	    <dependency>
+	      <groupId>org.springframework.cloud</groupId>
+	      <artifactId>spring-cloud-starter-sleuth</artifactId>
+	    </dependency>			
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
