@@ -147,6 +147,7 @@
     </dependencies>
   </dependencyManagement>
     <build>
+		<finalName>finance</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

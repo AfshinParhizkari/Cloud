@@ -140,6 +140,7 @@
   </dependencyManagement>
 
     <build>
+		<finalName>shopping</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

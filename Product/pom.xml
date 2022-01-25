@@ -126,6 +126,7 @@
     </dependencies>
   </dependencyManagement>
     <build>
+		<finalName>product</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
