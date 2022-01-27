@@ -24,8 +24,8 @@ public class CartSrv {
     @Autowired private CartDao cartDao;
     @Autowired private OrderMq orderMq;
 
-    public List<Cart> showCart() throws Exception {
-        return cartDao.findAll();
+    public List<Cart> showCart(Integer customerCode) throws Exception {
+        return cartDao.findByCustomerfk(customerCode);
     }
     public String deleteFromCart(Integer customercode,Integer productcode) throws Exception {
         cartDao.deleteProduct(customercode,productcode);

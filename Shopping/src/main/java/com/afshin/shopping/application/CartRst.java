@@ -73,8 +73,10 @@ public class CartRst {
     	    										+ "}",
     								summary = "shopping list") }))
     @PostMapping(value = "/showcart")
-    public ResponseEntity<String> find() throws Exception {
-        String response=(new ObjectMapper()).writeValueAsString(srv.showCart());
+    public ResponseEntity<String> find(@RequestBody String receivedData) throws Exception {
+        JSONObject json = new JSONObject(receivedData);
+        Integer customerCode=json.optInt("code",0);
+        String response=(new ObjectMapper()).writeValueAsString(srv.showCart(customerCode));
         return new ResponseEntity<String>(response,HttpStatus.OK);
     }
 
@@ -152,10 +154,10 @@ public class CartRst {
     				examples = {
     						@ExampleObject(
     								name = "save order#",
-    	    								value = "{\n"
-    	    										+ "  \"code\":2\n"
-    	    										+ "}",
-    								summary = "save for customer# 29") }))
+    								value = "{\n"
+    										+ "  \"code\":2\n"
+    										+ "}",
+    								summary = "save for customer# 2") }))
     @PostMapping(value = "/closecart")
     public ResponseEntity<String> close(@RequestBody String receivedData) throws Exception {
         JSONObject json = new JSONObject(receivedData);
@@ -179,7 +181,7 @@ public class CartRst {
     								summary = "All Products") }))
     @CircuitBreaker(name="products",fallbackMethod = "productFB")
     @PostMapping(value = "/showproduct")
-    public ResponseEntity<String> showProduct(@RequestBody(required = false) String receivedData) throws Exception {
+    public ResponseEntity<String> showProduct(@RequestBody String receivedData) throws Exception {
         JSONObject json = new JSONObject(receivedData);
         Integer code=json.optInt("code",0);
         Integer page=json.optInt("page",0);

@@ -28,6 +28,6 @@
    <!--________Set APPENDER ALL(TRACE(DEBUG(INFO(WARN(ERROR(FATAL(OFF)))))))_-->
    	<root level="INFO">  
         <appender-ref ref="consoleStudio" />
-        <appender-ref ref="logstash" />
+        <!-- <appender-ref ref="logstash" /> -->
    	</root>
 </configuration>

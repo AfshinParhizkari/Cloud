@@ -37,8 +37,8 @@ public class AMQPConfig {
     public Map<String, Object> getArguments() {
         Map<String, Object> arguments=new HashMap<>();
         arguments.put("x-message-ttl",360000);//queue remove: 100*60*60*24*3=3Days
-        arguments.put("x-expires", 86800000);//message remove: idle Queue : 100*60*60*24*10=1Day
-        arguments.put("x-max-length", 2000);//message
+        arguments.put("x-expires", 60480000);//idle Queue : 100*60*60*24*7=1Week
+        arguments.put("x-max-length", 1000);//message
         arguments.put("x-max-length-bytes", 3145728);//1024*1024*3=3MByte
         arguments.put("x-queue-mode", "lazy");//Saved message on HDD
         return arguments;
