@@ -8,13 +8,13 @@ package com.afshin.finance.application;
  * Email:       Afshin.Parhizkari@gmail.com
  * Description: Application Layer
  */
-
 import com.afshin.finance.domain.service.PaymentSrv;
 import com.afshin.finance.infrastructure.resource.PeopleRes;
 import com.afshin.finance.infrastructure.resource.ProductRes;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.json.JSONObject;
@@ -109,22 +109,10 @@ public class PaymentRst {
     }
 
     @Operation(summary = "return a customer")
-    @io.swagger.v3.oas.annotations.parameters.RequestBody(
-    		description = "Who am i?",
-    		required = true,
-    		content = @io.swagger.v3.oas.annotations.media.Content (
-    				mediaType = MediaType.APPLICATION_JSON_VALUE,
-    				examples = {
-    						@ExampleObject(
-    								name = "get customer",
-    	    								value = "{\n"
-    	    										+ "  \"code\":2\n"
-    	    										+ "}",
-    								summary = "who") }))
-    @PostMapping(value = "/who")
-    public ResponseEntity<String> whoami(@RequestBody String receivedData) throws Exception {
-    	String response=(new ObjectMapper()).writeValueAsString(peopleRes.find(receivedData));
-    	return new ResponseEntity<String>(response,HttpStatus.OK);
+    @Parameter(name = "customerCode",description = "Integer identifier", example = "2")
+    @GetMapping(value = "/who/{customerCode}")
+    public ResponseEntity<String> whoami(@PathVariable Integer customerCode) throws Exception {
+        return new ResponseEntity<String>((new ObjectMapper()).writeValueAsString(peopleRes.find(customerCode)),HttpStatus.OK);
     }
 
     @ExceptionHandler(Exception.class)

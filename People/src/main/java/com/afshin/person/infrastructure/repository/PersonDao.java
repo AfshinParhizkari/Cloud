@@ -16,6 +16,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PersonDao extends JpaRepository<Person, Integer>{
 	Page<Person> findAll(Pageable pageable);
+	List<Person> findAll();
 	List<Person> findByNationalkey(String nationalKey);
 	List<Person> findByPersonpk(Integer personcode);
 }

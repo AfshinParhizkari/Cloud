@@ -23,7 +23,7 @@ public class PeopleResFB implements PeopleRes{
     public static final Logger logger  = LoggerFactory.getLogger(PeopleResFB.class);
 
 	@Override
-	public List<Person> find(String inputValue) {
+	public List<Person> find(Integer inputValue) {
         logger.info("who service Circuit is open");
 		List<Person> persons=new ArrayList<Person>();
 		persons.add(new Person(0,0,0,"0000000000","People microservice is down","People/who doesn't response. try it later"));

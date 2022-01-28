@@ -25,12 +25,10 @@ public class PeopleRso {
 	@Autowired RestTemplate restTemplate;
 	@Autowired ResorceConfig resoConfig;
     @Value("${people.who}") private String serviceName;
-    public Person find(String inputValue) throws IOException {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<String> request =new HttpEntity<String>(inputValue, headers);
-        //Person[] persons =restTemplate.postForObject(resoConfig.getURI("people")+serviceName, request, Person[].class);
-        Person[] persons =restTemplate.postForObject(serviceName, request, Person[].class);
+    
+    public Person find(Integer customerCode) throws IOException {
+        //Person[] persons =restTemplate.geForObject(resoConfig.getURI("people")+serviceName, request, Person[].class);
+        Person[] persons =restTemplate.getForObject(serviceName+"/"+customerCode, Person[].class);
 
         //String productJson =restTemplate.postForObject(findPath, request, String.class);
         return Arrays.asList(persons).get(0);

@@ -11,11 +11,13 @@ package com.afshin.finance.infrastructure.resource;
 import java.util.List;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.afshin.finance.domain.entity.Person;
 
 @FeignClient(name = "${people.app}",fallback = PeopleResFB.class)
 public interface PeopleRes {
-	@PostMapping(value = "${people.service}",consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Person> find(String inputValue);
+	@GetMapping(value = "${people.service}/{customerCode}",produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Person> find(@PathVariable Integer customerCode);
 }

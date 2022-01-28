@@ -1,12 +1,14 @@
 # http://mageddo.com/tools/yaml-converter
+ip: 192.168.1.34
 server:
   port: 8080
-  address: 192.168.1.34
 # ----------- Eureka SD address for POST(Register),PUT(HeartBeat),Delete,Get
 eureka:
   client:
     service-url:
-      defaultZone: http://${server.address}:8761/eureka
+      defaultZone: http://${ip}:8761/eureka
+  instance:
+    hostname: ${ip} 
 # -- Spring & Cloud LoadBalancer,gateway
 spring:
   application:
@@ -36,7 +38,7 @@ spring:
         - id: people
           uri: lb://people
           predicates:
-          - Path=/ddd/people/who
+          - Path=/ddd/people/who/*
           filters: # WebFilter=GatewayFilter : filter for every single route
           - name: CircuitBreaker
             args:

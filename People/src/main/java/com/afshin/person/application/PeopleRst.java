@@ -15,6 +15,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -35,59 +36,22 @@ public class PeopleRst {
     @Autowired private PersonSrv srv;
     public static final Logger logger  = LoggerFactory.getLogger(PeopleRst.class);
 
-    @Operation(summary = "return a customer or customers")
-    @io.swagger.v3.oas.annotations.parameters.RequestBody(
-    		description = "Examples for get customer(s)",
-    		required = true,
-    		content = @io.swagger.v3.oas.annotations.media.Content (
-    				mediaType = MediaType.APPLICATION_JSON_VALUE,
-    				examples = {
-    						@ExampleObject(
-    								name = "All Customers according to page number",
-    								value = "{\n"
-    										+ "  \"code\":0,\n"
-    										+ "  \"page\":0\n"
-    										+ "}",
-    								summary = "All Customers"),
-    						@ExampleObject(
-    								name = "Just Customer code 2",
-    								value = "{\n"
-    										+ "  \"code\":2,\n"
-    										+ "  \"page\":0\n"
-    										+ "}",
-    								summary = "One Customer") }))
-    @PostMapping(value = "/find")
+    @Operation(summary = "return a customer or all customers")
+    @Parameter(name = "customerCode",description = "Integer identifier", example = "2")
+    @GetMapping(value = "/")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<String> find(@RequestBody String receivedData) throws Exception {
-        JSONObject json = new JSONObject(receivedData);
-        Integer code=json.optInt("code",0);
-        Integer page=json.optInt("page",0);
-        String response=(new ObjectMapper()).writeValueAsString(srv.find(code,page));
-        return new ResponseEntity<String>(response,HttpStatus.OK);
+    public ResponseEntity<String> findCustomer(@RequestParam(defaultValue = "0") Integer customerCode) throws Exception {
+        return new ResponseEntity<String>((new ObjectMapper()).writeValueAsString(srv.find(customerCode)),HttpStatus.OK);
     }
   
     @Operation(summary = "return a customer")
-    @io.swagger.v3.oas.annotations.parameters.RequestBody(
-    		description = "Who am i?",
-    		required = true,
-    		content = @io.swagger.v3.oas.annotations.media.Content (
-    				mediaType = MediaType.APPLICATION_JSON_VALUE,
-    				examples = {
-    						@ExampleObject(
-    								name = "get customer",
-    	    								value = "{\n"
-    	    										+ "  \"code\":2\n"
-    	    										+ "}",
-    								summary = "who") }))
-    @PostMapping(value = "/who")
+    @Parameter(name = "customerCode",description = "Integer identifier", example = "2")
+    @GetMapping(value = "/who/{customerCode}")
     @ResponseStatus(HttpStatus.OK)
     @JsonView(Person.PersonLight.class)
-    public ResponseEntity<String> whoami(@RequestBody String receivedData) throws Exception {
+    public ResponseEntity<String> whoami(@PathVariable Integer customerCode) throws Exception {
     	logger.info("Attention: Some App call this Instance");
-    	JSONObject json = new JSONObject(receivedData);
-        Integer code=json.optInt("code",0);
-        String response=(new ObjectMapper()).writeValueAsString(srv.find(code,0));
-        return new ResponseEntity<String>(response,HttpStatus.OK);
+        return new ResponseEntity<String>((new ObjectMapper()).writeValueAsString(srv.find(customerCode)),HttpStatus.OK);
 
     }
     

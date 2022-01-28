@@ -24,10 +24,9 @@ public class PersonSrv {
     @Autowired private PersonDao perDao;
     @Autowired private ContactDao conDao;
 
-    public List<Person> find(Integer code, Integer pageNum) throws Exception {
+    public List<Person> find(Integer code) throws Exception {
         List<Person> returnData;
-        Pageable somedata =  PageRequest.of(pageNum, 10, Sort.by("personpk").descending());
-        if(code==0) returnData = (perDao.findAll(somedata)).getContent();
+        if(code==0) returnData = perDao.findAll();
         else returnData=perDao.findByPersonpk(code);
         return returnData;
     }
