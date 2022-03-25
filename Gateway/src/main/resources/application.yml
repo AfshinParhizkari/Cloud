@@ -1,5 +1,5 @@
 # http://mageddo.com/tools/yaml-converter
-ip: 192.168.1.34
+ip: localhost
 server:
   port: 8080
 # ----------- Eureka SD address for POST(Register),PUT(HeartBeat),Delete,Get
