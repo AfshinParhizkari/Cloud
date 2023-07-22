@@ -1,0 +1,123 @@
+{
+	"info": {
+		"_postman_id": "65af1ddd-d10d-42b0-b438-cdb27a2a6f9c",
+		"name": "cloud",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "people",
+			"item": [
+				{
+					"name": "people-who",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://afshin:4041/ddd/people/who/2",
+							"protocol": "http",
+							"host": [
+								"afshin"
+							],
+							"port": "4041",
+							"path": [
+								"ddd",
+								"people",
+								"who",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "people-find",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://afshin:4041/ddd/people/?customerCode=2",
+							"protocol": "http",
+							"host": [
+								"afshin"
+							],
+							"port": "4041",
+							"path": [
+								"ddd",
+								"people",
+								""
+							],
+							"query": [
+								{
+									"key": "customerCode",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "people-delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"code\":2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4041/ddd/people/delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4041",
+							"path": [
+								"ddd",
+								"people",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "people-upsert",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n    \"personpk\": null,\n    \"persontypeid\": 1,\n    \"typedetailid\": 1,\n    \"nationalkey\": \"0042010953\",\n    \"booknumber\": 2783,\n    \"bookserial\": \"A/93/547643\",\n    \"bookserie\": \"1334557\",\n    \"passportno\": \"5432401DH\",\n    \"lastname\": \"Parhizkari\",\n    \"firstname\": \"Afshin\",\n    \"countryid\": 98,\n    \"cityid\": null,\n    \"birthdate\": \"1978-12-06\",\n    \"changerdate\": \"2021-09-30\",\n    \"contactsByPersonpk\": [\n      {\n        \"contactpk\": null,\n        \"personfk\": null,\n        \"ownernationalkey\": \"\",\n        \"contacttypeid\": 1,\n        \"countryid\": 98,\n        \"provinceid\": 90,\n        \"cityid\": 90,\n        \"contactnumber\": \"9032430637\",\n        \"contactdesc\": \"Par St,Tehran,Iran\",\n        \"email\": \"Afshin.Parhizkari@gmail.com\",\n        \"location\": null,\n        \"contactstatus\": true,\n        \"changerdate\": \"2021-08-25\"\n      }\n    ]\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4041/ddd/people/save",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4041",
+							"path": [
+								"ddd",
+								"people",
+								"save"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -1,5 +1,5 @@
-###  http://localhost:8081/ddd/api-ui
-POST http://localhost:8081/ddd/people/find
+###  http://localhost:4041/ddd/api-ui
+POST http://afshin:4041/ddd/people/find
 Accept: application/json
 Content-Type: application/json
 
@@ -8,15 +8,11 @@ Content-Type: application/json
   "page":0
 }
 ##################################################################################################
-POST http://localhost:8081/ddd/people/who
+GET http://afshin:4041/ddd/people/who/2
 Accept: application/json
 Content-Type: application/json
-
-{
-  "code":2
-}
 ##################################################################################################
-DELETE http://localhost:8081/ddd/people/delete
+DELETE http://localhost:4041/ddd/people/delete
 Accept: application/json
 Content-Type: application/json
 
@@ -24,7 +20,7 @@ Content-Type: application/json
     "code":2
 }
 ##################################################################################################
-PUT http://localhost:8081/ddd/people/save
+PUT http://localhost:4041/ddd/people/save
 Accept: application/json
 Content-Type: application/json
 

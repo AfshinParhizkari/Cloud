@@ -1,5 +1,5 @@
-###  http://localhost:8082/ddd/api-ui
-POST http://localhost:8082/ddd/product/find
+###  http://localhost:4042/ddd/api-ui
+POST http://localhost:4042/ddd/product/find
 Accept: application/json
 Content-Type: application/json
 
@@ -8,14 +8,14 @@ Content-Type: application/json
   "page":0
 }
 ##################################################################################################
-POST http://localhost:8082/ddd/product/quantity
+POST http://localhost:4042/ddd/product/quantity
 Accept: application/json
 Content-Type: application/json
 
 [2,3,4,5]
 ##################################################################################################
 
-DELETE http://localhost:8082/ddd/product/delete
+DELETE http://localhost:4042/ddd/product/delete
 Accept: application/json
 Content-Type: application/json
 
@@ -23,7 +23,7 @@ Content-Type: application/json
     "code":38
 }
 ##################################################################################################
-PUT http://localhost:8082/ddd/product/save
+PUT http://localhost:4042/ddd/product/save
 Accept: application/json
 Content-Type: application/json
 

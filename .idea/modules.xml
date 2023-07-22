@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Cloud.iml" filepath="$PROJECT_DIR$/.idea/Cloud.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Eurekaserver/Eurekaserver.iml" filepath="$PROJECT_DIR$/Eurekaserver/Eurekaserver.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Gateway/Gateway.iml" filepath="$PROJECT_DIR$/Gateway/Gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Monitoring/Monitoring.iml" filepath="$PROJECT_DIR$/Monitoring/Monitoring.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Finance/finance.iml" filepath="$PROJECT_DIR$/Finance/finance.iml" />
+      <module fileurl="file://$PROJECT_DIR$/People/people.iml" filepath="$PROJECT_DIR$/People/people.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Product/product.iml" filepath="$PROJECT_DIR$/Product/product.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Shopping/shopping.iml" filepath="$PROJECT_DIR$/Shopping/shopping.iml" />
+    </modules>
+  </component>
+</project>
