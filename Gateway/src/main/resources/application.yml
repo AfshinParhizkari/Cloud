@@ -1,7 +1,7 @@
 # http://mageddo.com/tools/yaml-converter
-ip: localhost
+ip: afshin
 server:
-  port: 8080
+  port: 4040
 # ----------- Eureka SD address for POST(Register),PUT(HeartBeat),Delete,Get
 eureka:
   client:

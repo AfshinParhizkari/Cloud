@@ -1,5 +1,5 @@
 ##### Show Product #################################
-POST http://localhost:8080/ddd/product/showproduct
+POST http://localhost:4040/ddd/product/showproduct
 Accept: application/json
 Content-Type: application/json
 
@@ -8,7 +8,7 @@ Content-Type: application/json
   "page":null
 }
 ##### who #################################
-POST http://localhost:8080/ddd/people/who
+POST http://localhost:4040/ddd/people/who
 Accept: application/json
 Content-Type: application/json
 
