@@ -84,3 +84,24 @@ resilience4j:
         wait-duration-in-open-state: 5s #Time based wait min to 5 fail to open circuit
         failure-rate-threshold: 50
         event-consumer-buffer-size: 10
+# ---------------------------------- Actuator Endpoints,Metrics,Audit
+management:
+  endpoint:
+    beans:
+      enabled: true
+    caches:
+      enabled: true
+    health:
+      show-details: ALWAYS
+    info:
+      enabled: true
+    jolokia:
+      enabled: true
+    sessions:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  server:
+    port: 7080

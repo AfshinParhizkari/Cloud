@@ -47,9 +47,9 @@ public class PaymentRst {
     						@ExampleObject(
     								name = "Pay sample order",
     								value = "{\n"
-    										+ "  \"customer\":2,\n"
+    										+ "  \"customer\":3,\n"
     										+ "  \"transaction\":\"sb125954c\",\n"
-    										+ "  \"transport\": \"2021-11-11 14:30:50\"\n"
+    										+ "  \"transport\": \"2023-07-30 14:30:50\"\n"
     										+ "}",
     								summary = "pay") }))
     @PostMapping(value = "/payed")
@@ -109,7 +109,7 @@ public class PaymentRst {
     }
 
     @Operation(summary = "return a customer")
-    @Parameter(name = "customerCode",description = "Integer identifier", example = "2")
+    @Parameter(name = "customerCode",description = "Integer identifier", example = "3")
     @GetMapping(value = "/who/{customerCode}")
     public ResponseEntity<String> whoami(@PathVariable Integer customerCode) throws Exception {
         return new ResponseEntity<String>((new ObjectMapper()).writeValueAsString(peopleRes.find(customerCode)),HttpStatus.OK);

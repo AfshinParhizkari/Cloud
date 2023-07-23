@@ -40,7 +40,7 @@ public class CartRst {
     public static final Logger logger  = LoggerFactory.getLogger(CartRst.class);
 
     @Operation(summary = "return a customer")
-    @Parameter(name = "customerCode",description = "Integer identifier", example = "2")
+    @Parameter(name = "customerCode",description = "Integer identifier", example = "3")
     @CircuitBreaker(name="whoami",fallbackMethod = "whomFB")
     @GetMapping(value = "/who/{customerCode}")
     public ResponseEntity<String> whoami(@PathVariable Integer customerCode) throws Exception {
@@ -58,7 +58,7 @@ public class CartRst {
     						@ExampleObject(
     								name = "get cart for this customers",
     	    								value = "{\n"
-    	    										+ "  \"code\":2\n"
+    	    										+ "  \"code\":3\n"
     	    										+ "}",
     								summary = "shopping list") }))
     @PostMapping(value = "/showcart")
@@ -79,10 +79,10 @@ public class CartRst {
     						@ExampleObject(
     								name = "Delete product#",
     	    								value = "{\n"
-    	    										+ "  \"customercode\":2,\n"
-    	    										+ "  \"productcode\":29\n"
+    	    										+ "  \"customercode\":3,\n"
+    	    										+ "  \"productcode\":34\n"
     	    										+ "}",
-    								summary = "delete product# 29") }))
+    								summary = "delete product# 34") }))
     @DeleteMapping(value = "/deletefromcart")
     public ResponseEntity<String> delete(@RequestBody String receivedData) throws Exception {
         JSONObject json = new JSONObject(receivedData);
@@ -103,7 +103,7 @@ public class CartRst {
     	    								value = "{\n"
     	    										+ "  \"code\":3\n"
     	    										+ "}",
-    								summary = "cancel customer# 29") }))
+    								summary = "cancel customer# 3") }))
 
     @DeleteMapping(value = "/cancelcart")
     public ResponseEntity<String> cancel(@RequestBody String receivedData) throws Exception {
@@ -122,12 +122,12 @@ public class CartRst {
     						@ExampleObject(
     								name = "add product",
     								value = "{\n"
-    										+ "  \"customerfk\": 2,\n"
-    										+ "  \"productfk\": 28,\n"
-    										+ "  \"quantity\": 0,\n"
+    										+ "  \"customerfk\": 3,\n"
+    										+ "  \"productfk\": 34,\n"
+    										+ "  \"quantity\": 1,\n"
     										+ "  \"price\": 20.20\n"
     										+ "}",
-    								summary = "add product to cart") }))
+    								summary = "add product to customer's cart") }))
     @Schema(implementation = Cart.class)
     @PutMapping(value = "/addtocart")
     public ResponseEntity<String> save(@Valid @RequestBody Cart obj) throws Exception {
@@ -144,9 +144,9 @@ public class CartRst {
     						@ExampleObject(
     								name = "save order#",
     								value = "{\n"
-    										+ "  \"code\":2\n"
+    										+ "  \"code\":3\n"
     										+ "}",
-    								summary = "save for customer# 2") }))
+    								summary = "save for customer# 3") }))
     @PostMapping(value = "/closecart")
     public ResponseEntity<String> close(@RequestBody String receivedData) throws Exception {
         JSONObject json = new JSONObject(receivedData);

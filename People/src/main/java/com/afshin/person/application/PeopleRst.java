@@ -37,7 +37,7 @@ public class PeopleRst {
     public static final Logger logger  = LoggerFactory.getLogger(PeopleRst.class);
 
     @Operation(summary = "return a customer or all customers")
-    @Parameter(name = "customerCode",description = "Integer identifier", example = "2")
+    @Parameter(name = "customerCode",description = "Integer identifier", example = "3")
     @GetMapping(value = "/")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<String> findCustomer(@RequestParam(defaultValue = "0") Integer customerCode) throws Exception {
@@ -45,7 +45,7 @@ public class PeopleRst {
     }
   
     @Operation(summary = "return a customer")
-    @Parameter(name = "customerCode",description = "Integer identifier", example = "2")
+    @Parameter(name = "customerCode",description = "Integer identifier", example = "3")
     @GetMapping(value = "/who/{customerCode}")
     @ResponseStatus(HttpStatus.OK)
     @JsonView(Person.PersonLight.class)

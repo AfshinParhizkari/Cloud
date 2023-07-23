@@ -2,7 +2,7 @@ package com.afshin.finance.infrastructure.mq;
 /**
  * @Project DDD
  * @Author Afshin Parhizkari
- * @Date 2021 - 11 - 08
+ * @Date 2021 - 11 - 08346
  * @Time 8:43 AM
  * Created by   IntelliJ IDEA
  * Email:       Afshin.Parhizkari@gmail.com

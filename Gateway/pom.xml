@@ -85,7 +85,12 @@
 	    <dependency>
 	      <groupId>org.springframework.cloud</groupId>
 	      <artifactId>spring-cloud-starter-sleuth</artifactId>
-	    </dependency>		
+	    </dependency>
+<!-- _________ actuator to monitor service health _____________ -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
 	</dependencies>
   <dependencyManagement>
     <dependencies>
