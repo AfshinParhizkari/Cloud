@@ -1,0 +1,7 @@
+docker start nexus mysql rabbit
+1. check or add customer : http://afshin:4041/ddd/api-ui
+2. check or add product: http://afshin:4042/ddd/api-ui
+3. add products(34,35,36) to cif 3: http://afshin:4043/ddd/api-ui
+4. close cart for cif 3: http://afshin:4043/ddd/api-ui
+5. pay for cif 3: http://afshin:4044/ddd/api-ui
+6. carry with order id 10473: http://afshin:4044/ddd/api-ui
