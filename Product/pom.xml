@@ -3,9 +3,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.5.6</version>
+        <groupId>com.afshin</groupId>
+        <artifactId>pom-springcloud-ilford</artifactId>
+        <version>3.0.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.afshin</groupId>
@@ -14,119 +14,9 @@
     <name>Product</name>
     <description>Product Microservice</description>
     <url>https://github.com/AfshinParhizkari</url>
-    <developers>
-        <developer>
-            <id>Afshin.Parhizkari</id>
-            <name>Afshin Parhizkari</name>
-            <organization>Free lancer</organization>
-            <organizationUrl>https://github.com/AfshinParhizkari</organizationUrl>
-            <timezone>+3.30</timezone>
-        </developer>
-        <developer>
-            <id>Mahdieh.Parhizkari</id>
-            <name>Mahdieh Parhizkari</name>
-            <organization>Free lancer</organization>
-            <organizationUrl>https://github.com/MahdiehParhizkari</organizationUrl>
-            <timezone>+3.30</timezone>
-        </developer>
-    </developers>
-    <properties>
-        <java.version>11</java.version>
-		<spring-cloud.version>2020.0.4</spring-cloud.version>
-    </properties>
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-validation</artifactId>
-        </dependency>
-        <!-- ___ Rest api Documentation and test via spring doc-openapi3(swagger) ___ -->
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-ui</artifactId>
-            <version>1.5.11</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-data-rest</artifactId>
-            <version>1.5.11</version>
-        </dependency>
-        <!-- ________________ common utility ______________ -->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20190722</version>
-        </dependency>
-        <!-- ________________ MQ Broker  ______________ -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-amqp</artifactId>
-        </dependency>
-        <dependency>
-		    <groupId>org.springframework.boot</groupId>
-		    <artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>
-<!-- _________ Logstash , Logback is embedded in Spring boot _____________ -->
-		<dependency>
-			<groupId>net.logstash.logback</groupId>
-			<artifactId>logstash-logback-encoder</artifactId>
-			<version>7.0.1</version>
-		</dependency>
-<!-- _________ Sleuth , TraceId and SpanId _____________ -->
-	    <dependency>
-	      <groupId>org.springframework.cloud</groupId>
-	      <artifactId>spring-cloud-starter-sleuth</artifactId>
-	    </dependency>		
-    </dependencies>
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.springframework.cloud</groupId>
-        <artifactId>spring-cloud-dependencies</artifactId>
-        <version>${spring-cloud.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
+
     <build>
-		<finalName>product</finalName>
+        <finalName>product</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

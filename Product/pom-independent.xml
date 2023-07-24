@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.afshin</groupId>
-    <artifactId>people</artifactId>
+    <artifactId>product</artifactId>
     <version>1</version>
-    <name>People</name>
-    <description>People Microservice</description>
+    <name>Product</name>
+    <description>Product Microservice</description>
     <url>https://github.com/AfshinParhizkari</url>
     <developers>
         <developer>
@@ -89,6 +89,11 @@
             <artifactId>json</artifactId>
             <version>20190722</version>
         </dependency>
+        <!-- ________________ MQ Broker  ______________ -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
         <dependency>
 		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-actuator</artifactId>
@@ -107,15 +112,8 @@
 	    <dependency>
 	      <groupId>org.springframework.cloud</groupId>
 	      <artifactId>spring-cloud-starter-sleuth</artifactId>
-	    </dependency>		
-<!-- _________ Zipkin is a distributed tracing system  _____________ -->
-	    <dependency>
-	      <groupId>org.springframework.cloud</groupId>
-	      <artifactId>spring-cloud-sleuth-zipkin</artifactId>
 	    </dependency>
-
     </dependencies>
-    
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -127,10 +125,8 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-
-
     <build>
-		<finalName>people</finalName>
+		<finalName>product</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -146,13 +142,4 @@
             </plugin>
         </plugins>
     </build>
-    <!--My private repository, nexus: the pom repositories config has top priority-->
-    <!--<repositories>
-        <repository>
-            <id>maven-int-lib</id>
-            <url>http://1afshin:8081/repository/mvn-group/</url>
-            <releases><enabled>true</enabled></releases>
-            <snapshots><enabled>false</enabled></snapshots>
-        </repository>
-    </repositories>-->
 </project>
