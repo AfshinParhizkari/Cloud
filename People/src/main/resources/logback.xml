@@ -5,29 +5,34 @@
    <!--___________________________ APPENDER__________________________________-->
     <appender name="consoleStudio" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-                <pattern>${LOG_PATTERN}</pattern>
+            <pattern>${LOG_PATTERN}</pattern>
         </encoder>
     </appender>
-    <!-- <appender name="logstash" class="net.logstash.logback.appender.LogstashAccessTcpSocketAppender">
-        <destination>afshin:9090</destination>
-        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+    <appender name="tcp-logstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <param name="Encoding" value="UTF-8"/>
+        <destination>afshin:9600</destination>
+        <destination>afshin:5044</destination>
+        <!--<ringBufferSize>32000</ringBufferSize>-->
+        <!--<writeBufferSize>16384</writeBufferSize>-->
+        <!--<ssl/>-->
+        <encoder class="net.logstash.logback.encoder.AccessEventCompositeJsonEncoder">
             <providers>
-                <mdc /> MDC variables on the Thread will be written as JSON fields
-                <context /> Outputs entries from logback's context
-                <version /> Logstash json format version, the @version field in the output
-                <logLevel />
-                <loggerName />
-                <pattern><pattern>{"serviceName": "people-micro"}</pattern></pattern>
-                <threadName />
-                <message />
-                <logstashMarkers />
-                <stackTrace />
+                <!--<mdc />--> <!--MDC variables on the Thread will be written as JSON fields-->
+                <!--<context /> --><!--Outputs entries from logback's context-->
+                <!--<version />--> <!--Logstash json format version, the @version field in the output-->
+                <!--<logLevel />-->
+                <!--<loggerName />-->
+               <pattern>{"serviceName": "people-micro"}</pattern>
+                <!--<threadName />-->
+                <!--<message />-->
+                <!--<logstashMarkers />-->
+                <!--<stackTrace />-->
             </providers>
         </encoder>
-    </appender> -->
-   <!--________Set APPENDER ALL(TRACE(DEBUG(INFO(WARN(ERROR(FATAL(OFF)))))))_-->
+    </appender>
+    <!--________Set APPENDER ALL(TRACE(DEBUG(INFO(WARN(ERROR(FATAL(OFF)))))))_-->
    	<root level="INFO">  
         <appender-ref ref="consoleStudio" />
-        <!-- <appender-ref ref="logstash" /> -->
+        <appender-ref ref="tcp-logstash" />
    	</root>
 </configuration>
