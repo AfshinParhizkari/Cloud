@@ -3,15 +3,15 @@
     <!-- Logging Properties     -->
     <Property name="LOG_PATTERN" value="%d{yyyy-MM-dd' 'HH:mm:ss.SSSZ} %highlight(%-5level) [%thread, %X{X-B3-TraceId:-},%X{X-B3-SpanId:-}] %cyan(%C{0}.%M:%L) %yellow(%msg) %n"/>
    <!--___________________________ APPENDER__________________________________-->
-    <appender name="consoleStudio" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>${LOG_PATTERN}</pattern>
         </encoder>
     </appender>
-    <appender name="tcp-logstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+    <appender name="logstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
         <param name="Encoding" value="UTF-8"/>
-        <destination>afshin:9600</destination>
-        <destination>afshin:5044</destination>
+        <destination>afshin:6000</destination>
+        <!--<destination>afshin:5044</destination>-->
         <!--<ringBufferSize>32000</ringBufferSize>-->
         <!--<writeBufferSize>16384</writeBufferSize>-->
         <!--<ssl/>-->
@@ -19,20 +19,20 @@
             <providers>
                 <!--<mdc />--> <!--MDC variables on the Thread will be written as JSON fields-->
                 <!--<context /> --><!--Outputs entries from logback's context-->
-                <!--<version />--> <!--Logstash json format version, the @version field in the output-->
+                <version /> <!--Logstash json format version, the @version field in the output-->
                 <!--<logLevel />-->
                 <!--<loggerName />-->
-               <pattern>{"serviceName": "people-micro"}</pattern>
-                <!--<threadName />-->
-                <!--<message />-->
+                <pattern>{"serviceName": "cloud-people"}</pattern>
+                <message />
+                <threadName />
                 <!--<logstashMarkers />-->
-                <!--<stackTrace />-->
+                <stackTrace />
             </providers>
         </encoder>
     </appender>
     <!--________Set APPENDER ALL(TRACE(DEBUG(INFO(WARN(ERROR(FATAL(OFF)))))))_-->
    	<root level="INFO">  
-        <appender-ref ref="consoleStudio" />
-        <appender-ref ref="tcp-logstash" />
+        <appender-ref ref="console" />
+        <appender-ref ref="logstash" />
    	</root>
 </configuration>
