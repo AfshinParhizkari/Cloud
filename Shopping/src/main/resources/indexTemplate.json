@@ -1,0 +1,10 @@
+{
+    "index_patterns": [
+      "${LOG_PATTERN}"
+    ],
+    "settings": {
+      "index": {
+        "refresh_interval": "5s"
+      }
+    }
+}

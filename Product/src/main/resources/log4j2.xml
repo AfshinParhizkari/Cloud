@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30">
+    <Properties>
+        <Property name="LOG_PATTERN" value="%d{yyyy-MM-dd' 'HH:mm:ss.SSSZ} %highlight(%-5level) [%thread, %X{X-B3-TraceId:-},%X{X-B3-SpanId:-}] %Cyan(%C{0}.%M:%L) %Yellow	(%msg) %n"/>
+        <Property name="log-path">/var/log/afshin/</Property>
+    </Properties>
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+        <RollingFile name="ErrorLogger" fileName="${log-path}/product-error.log" filePattern="${log-path}/archived/product-error-%d{yyyy-MM-dd}-%i.log.gz">
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="500 MB" />
+            </Policies>
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </RollingFile>
+        <RollingFile name="EventLogger" fileName="${log-path}/product-event.log" filePattern="${log-path}/archived/product-event-%d{yyyy-MM-dd}-%i.log.gz">
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="500 MB" />
+            </Policies>
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </RollingFile>
+        <RollingFile name="AllLogger" fileName="${log-path}/product-all.log" filePattern="${log-path}/archived/product-all-%d{yyyy-MM-dd}-%i.log.gz">
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="500 MB" />
+            </Policies>
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </RollingFile>
+<!--Graylog Extended Log Format-->
+        <!--<appender name="gelf" class="biz.paluch.logging.gelf.logback.GelfLogbackAppender">
+            <host>udp:afshin</host>
+            <port>7000</port>
+            <version>1.0</version>
+            <facility>logstash-gelf</facility>
+            <extractStackTrace>true</extractStackTrace>
+            <filterStackTrace>true</filterStackTrace>
+            <includeLocation>true</includeLocation>
+            <mdcProfiling>true</mdcProfiling>
+            <timestampPattern>yyyy-MM-dd HH:mm:ss,SSS</timestampPattern>
+            <maximumMessageSize>8192</maximumMessageSize>
+            <additionalFields>service-name=cloud-product</additionalFields>
+            <additionalFieldTypes>service-name=String</additionalFieldTypes>
+            <mdcFields>mdcField1,mdcField2</mdcFields>
+            <dynamicMdcFields>myMdc.*,[a-z]+Field</dynamicMdcFields>
+            <dynamicMdcFieldTypes>my_field.*=String,business\..*\.field=double</dynamicMdcFieldTypes>
+            <includeFullMdc>true</includeFullMdc>
+            <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+                <level>INFO</level>
+            </filter>
+        </appender>-->
+    </Appenders>
+    <Loggers>
+        <Logger name="EventLogger" level="info" additivity="false">
+            <AppenderRef ref="console" />
+            <AppenderRef ref="EventLogger" level="info"/>
+        </Logger>
+        <Logger name="ErrorLogger" level="error" additivity="false">
+            <AppenderRef ref="console" />
+            <AppenderRef ref="ErrorLogger" level="error"/>
+        </Logger>
+
+        <Root level="debug" additivity="false">
+            <AppenderRef ref="console" level="info"/>
+            <AppenderRef ref="AllLogger" level="debug"/>
+            <!--<AppenderRef ref="gelf" level="debug"/>-->
+        </Root>
+    </Loggers>
+</Configuration>

@@ -115,11 +115,39 @@
 		    <artifactId>spring-cloud-starter-circuitbreaker-reactor-resilience4j</artifactId>
 		</dependency>
 <!-- _________ Logstash , Logback is embedded in Spring boot _____________ -->
-		<dependency>
+		<!--<dependency>
 			<groupId>net.logstash.logback</groupId>
 			<artifactId>logstash-logback-encoder</artifactId>
 			<version>7.0.1</version>
-		</dependency>
+		</dependency>-->
+<!-- _________ Spring boot + log4j2 + aop + Logstash  _____________ -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <!--<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+        </dependency>-->
+        <dependency>
+            <groupId>org.appenders.log4j</groupId>
+            <artifactId>log4j2-elasticsearch-jest</artifactId>
+            <version>1.6.1</version>
+        </dependency>
 <!-- _________ Sleuth , TraceId and SpanId _____________ -->
 	    <dependency>
 	      <groupId>org.springframework.cloud</groupId>

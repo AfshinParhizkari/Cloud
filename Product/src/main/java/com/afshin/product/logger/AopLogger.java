@@ -1,4 +1,4 @@
-package com.afshin.person.logger;
+package com.afshin.product.logger;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -11,15 +11,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class AopLogger {
-
     @Autowired MyLogger logger;
-
-    @Before("execution(* com.afshin..service..*(..)) ")
-    public void logService(JoinPoint joinPoint) {
-        String args = argsToString(joinPoint.getArgs());
-        String callingMethod = joinPoint.getSignature().getName() + " called :params=" + args;
-        logger.eventLogger.info("AOP-BF-SRV: " + callingMethod);
-    }
 
     @Before("execution(* com.afshin..application..*(..)) ")
     public void logController(JoinPoint joinPoint) {

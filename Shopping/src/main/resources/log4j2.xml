@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30">
+    <Properties>
+        <Property name="LOG_PATTERN" value="%d{yyyy-MM-dd' 'HH:mm:ss.SSSZ} %highlight(%-5level) [%thread, %X{X-B3-TraceId:-},%X{X-B3-SpanId:-}] %Cyan(%C{0}.%M:%L) %Yellow	(%msg) %n"/>
+        <Property name="log-path">/var/log/afshin/</Property>
+    </Properties>
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+        <RollingFile name="ErrorLogger" fileName="${log-path}/shopping-error.log" filePattern="${log-path}/archived/shopping-error-%d{yyyy-MM-dd}-%i.log.gz">
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="500 MB" />
+            </Policies>
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </RollingFile>
+        <RollingFile name="EventLogger" fileName="${log-path}/shopping-event.log" filePattern="${log-path}/archived/shopping-event-%d{yyyy-MM-dd}-%i.log.gz">
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="500 MB" />
+            </Policies>
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </RollingFile>
+        <RollingFile name="AllLogger" fileName="${log-path}/shopping-all.log" filePattern="${log-path}/archived/shopping-all-%d{yyyy-MM-dd}-%i.log.gz">
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="500 MB" />
+            </Policies>
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </RollingFile>
+        <!-- How can send index to logstash-> elastic? -->
+        <!--<Socket name="logstash" host="afshin" port="6000">
+            <JsonLayout properties="true"/>
+            <PatternLayout pattern="${LOG_PATTERN}" />
+            <JsonTemplateLayout>
+                <EventTemplateAdditionalField key="service-name" value= "cloud-shopping"/>
+            </JsonTemplateLayout>
+        </Socket>-->
+        <!-- elastic:  How can see elastic server directly? -->
+        <!-- Jest Ext: How can send LOG_PATTERN to elastic directly? -->
+        <Elasticsearch name="elastic">
+            <IndexName indexName="cloud-shopping" />
+            <!--<DocumentType documentType="json" />
+            <HttpClientConfig url="http://afshin:9200" />-->
+            <!--<Layout class="org.apache.logging.log4j.core.layout.JsonLayout">
+                <KeyValuePair key="service-name" value="cloud-shopping" />
+            </Layout>-->
+            <!--<JacksonJsonLayout>
+                <VirtualProperty name="hostname" value="$${sys:hostname:-undefined}" />
+                <VirtualProperty name="service-name" value="cloud-shopping" />
+                <PooledItemSourceFactory itemSizeInBytes="1024" initialPoolSize="6000" />
+            </JacksonJsonLayout>-->
+            <AsyncBatchDelivery>
+                <IndexTemplate name="log4j2"  path="classpath:indexTemplate.json" />
+                <JestHttp serverUris="http://afshin:9200" />
+            </AsyncBatchDelivery>
+        </Elasticsearch>
+    </Appenders>
+    <Loggers>
+        <Logger name="EventLogger" level="info" additivity="false">
+            <AppenderRef ref="console" />
+            <AppenderRef ref="EventLogger" level="info"/>
+        </Logger>
+        <Logger name="ErrorLogger" level="error" additivity="false">
+            <AppenderRef ref="console" />
+            <AppenderRef ref="ErrorLogger" level="error"/>
+        </Logger>
+        <AsyncLogger name="elastic-direct" level="debug">
+            <AppenderRef ref="elastic" />
+        </AsyncLogger>
+        <Root level="debug" additivity="false">
+            <AppenderRef ref="console" level="info"/>
+            <AppenderRef ref="AllLogger" level="debug"/>
+            <!--<AppenderRef ref="logstash" level="debug"/>-->
+            <!--<AppenderRef ref="elastic" level="debug"/>-->
+        </Root>
+    </Loggers>
+</Configuration>

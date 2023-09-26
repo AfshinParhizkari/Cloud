@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.appenders.st:appenders-jackson-st:1.0.1">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/appenders/st/appenders-jackson-st/1.0.1/appenders-jackson-st-1.0.1.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/appenders/st/appenders-jackson-st/1.0.1/appenders-jackson-st-1.0.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/appenders/st/appenders-jackson-st/1.0.1/appenders-jackson-st-1.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

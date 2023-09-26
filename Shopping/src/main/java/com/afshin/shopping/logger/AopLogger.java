@@ -1,4 +1,4 @@
-package com.afshin.person.logger;
+package com.afshin.shopping.logger;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
