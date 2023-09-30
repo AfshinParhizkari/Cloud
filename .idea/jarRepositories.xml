@@ -7,6 +7,11 @@
       <option name="url" value="http://afshin:8081/repository/mvn-group/" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="spring-repo" />
+      <option name="name" value="spring-repo" />
+      <option name="url" value="https://repo.spring.io/release" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="central" />
       <option name="name" value="Central Repository" />
       <option name="url" value="https://repo.maven.apache.org/maven2" />
@@ -17,9 +22,24 @@
       <option name="url" value="http://afshin:8081/repository/mvn-group/" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="spring-repo" />
+      <option name="name" value="spring-repo" />
+      <option name="url" value="https://repo1.maven.org/maven2/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven-lib-group" />
+      <option name="name" value="maven-lib-group" />
+      <option name="url" value="https://repo1.maven.org/maven2/" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="central" />
       <option name="name" value="Maven Central repository" />
       <option name="url" value="https://repo1.maven.org/maven2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven-ext-lib" />
+      <option name="name" value="maven-ext-lib" />
+      <option name="url" value="https://repo1.maven.org/maven2/" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="jboss.community" />
@@ -35,6 +55,11 @@
       <option name="id" value="central" />
       <option name="name" value="Central Repository" />
       <option name="url" value="http://afshin:8081/repository/mvn-group/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="Central Repository" />
+      <option name="url" value="https://repo1.maven.org/maven2/" />
     </remote-repository>
   </component>
 </project>

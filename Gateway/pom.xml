@@ -81,12 +81,17 @@
 			<artifactId>logstash-logback-encoder</artifactId>
 			<version>7.0.1</version>
 		</dependency>
-<!-- _________ Sleuth , TraceId and SpanId _____________ -->
-	    <dependency>
-	      <groupId>org.springframework.cloud</groupId>
-	      <artifactId>spring-cloud-starter-sleuth</artifactId>
-	    </dependency>
-<!-- _________ actuator to monitor service health _____________ -->
+        <!-- _________ Sleuth:TraceId and SpanId _____________ -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-sleuth</artifactId>
+        </dependency>
+        <!-- _________ Zipkin is a distributed tracing system  _____________ -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-sleuth-zipkin</artifactId>
+        </dependency>
+        <!-- _________ actuator to monitor service health _____________ -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>

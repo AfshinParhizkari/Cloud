@@ -149,10 +149,16 @@
             <version>1.6.1</version>
         </dependency>
 <!-- _________ Sleuth , TraceId and SpanId _____________ -->
-	    <dependency>
-	      <groupId>org.springframework.cloud</groupId>
-	      <artifactId>spring-cloud-starter-sleuth</artifactId>
-	    </dependency>		
+        <!-- _________ Sleuth:TraceId and SpanId _____________ -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-sleuth</artifactId>
+        </dependency>
+        <!-- _________ Zipkin is a distributed tracing system  _____________ -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-sleuth-zipkin</artifactId>
+        </dependency>
     </dependencies>
     
   <dependencyManagement>

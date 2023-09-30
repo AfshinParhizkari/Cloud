@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="WARN" monitorInterval="30">
     <Properties>
-        <Property name="LOG_PATTERN" value="%d{yyyy-MM-dd' 'HH:mm:ss.SSSZ} %highlight(%-5level) [%thread, %X{X-B3-TraceId:-},%X{X-B3-SpanId:-}] %Cyan(%C{0}.%M:%L) %Yellow	(%msg) %n"/>
+        <Property name="LOG_PATTERN">%d{yyyy-MM-dd' 'HH:mm:ss.SSSZ} %highlight(%-5level) [%thread, %X{X-B3-TraceId:-},%X{X-B3-SpanId:-}] %cyan(%C{0}.%M:%L) %yellow(%msg) %n</Property>
         <Property name="log-path">/var/log/afshin/</Property>
     </Properties>
     <Appenders>
